@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: log-output
+  name: ping-pong-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: log-output
+      app: ping-pong-app
   template:
     metadata:
       labels:
-        app: log-output
+        app: ping-pong-app
     spec:
       containers:
-        - name: log-output
-          image: heclll/logger:0.4
+        - name: ping-pong-app
+          image: heclll/ping-pong-app:0.0

@@ -16,7 +16,7 @@ const getRandomString = () => {
 
 app.use(express.json())
 
-app.get('/', async (req, res) => {
+app.get('/logs', async (req, res) => {
   const timestamp = new Date().toISOString()
   res.send(`${randomString} ${timestamp}`)
 })
