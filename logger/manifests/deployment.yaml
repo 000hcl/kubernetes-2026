@@ -12,6 +12,17 @@ spec:
       labels:
         app: log-output
     spec:
+      volumes:
+        - name: log-volume
+          emptyDir: {}
       containers:
-        - name: log-output
-          image: heclll/logger:0.4
+        - name: log-writer
+          image: heclll/log-writer:0.3
+          volumeMounts:
+            - name: log-volume
+              mountPath: /usr/src/app/files
+        - name: log-getter
+          image: heclll/log-getter:0.7
+          volumeMounts:
+            - name: log-volume
+              mountPath: /usr/src/app/files
