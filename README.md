@@ -13,4 +13,5 @@
 - [1.7](https://github.com/000hcl/kubernetes-2026/tree/1.7/logger)
 - [1.8](https://github.com/000hcl/kubernetes-2026/tree/1.8/todo-app)
 - [1.9](https://github.com/000hcl/kubernetes-2026/tree/1.9)
-- 1.10 *current*
+- [1.10](https://github.com/000hcl/kubernetes-2026/tree/1.10/logger)
+- 1.11 *current*

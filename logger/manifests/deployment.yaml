@@ -15,12 +15,18 @@ spec:
       volumes:
         - name: log-volume
           emptyDir: {}
+        - name: log-persistent
+          persistentVolumeClaim:
+            claimName: log-claim
       containers:
         - name: log-writer
-          image: heclll/log-writer:0.3
+          image: heclll/log-writer:0.5
+
           volumeMounts:
             - name: log-volume
               mountPath: /usr/src/app/files
+            - name: log-persistent
+              mountPath: /usr/src/app/persistent
         - name: log-getter
           image: heclll/log-getter:0.7
           volumeMounts:
