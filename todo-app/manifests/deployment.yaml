@@ -12,6 +12,13 @@ spec:
       labels:
         app: todo-app
     spec:
+      volumes:
+        - name: persistent
+          persistentVolumeClaim:
+            claimName: log-claim
       containers:
         - name: todo-app
-          image: heclll/todo-app:0.2
+          image: heclll/todo-app:0.8
+          volumeMounts:
+            - name: persistent
+              mountPath: /usr/src/app/persistent

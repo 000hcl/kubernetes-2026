@@ -1,0 +1,17 @@
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h2 {
+  display: flex;
+  justify-content: center;
+}
+
+i {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
