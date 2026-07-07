@@ -1,5 +1,7 @@
 import axios from 'axios'
 import { useEffect } from "react"
+import TodoForm from './components/todoForm'
+import TodoList from './components/todoList'
 
 function App() {
   useEffect(() => {
@@ -20,6 +22,8 @@ function App() {
       </h2>
       <img src={"/pstorage/frontimg.jpg"} />
       <i>DevOps with Kubernetes 2026</i>
+      <TodoForm/>
+      <TodoList/>
 
     </div>
   )

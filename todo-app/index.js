@@ -27,7 +27,7 @@ app.post('/imgcheck', async (req, res) => {
 
 const downloadImg = async () => {
   try {
-    const picsumUrl = 'https://picsum.photos/400'
+    const picsumUrl = 'https://picsum.photos/200'
     const response = await fetch(picsumUrl)
     const arrayBuffer = await response.arrayBuffer()
     const buffer = Buffer.from(arrayBuffer)
