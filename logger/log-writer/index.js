@@ -4,12 +4,12 @@ const randomString = Math.random().toString(36).substr(2, 8)
 
 const getPong = async () => {
   try {
-    await fs.access('/usr/src/app/persistent/pong.log', fs.constants.F_OK)
-    const pongText = await fs.readFile('/usr/src/app/persistent/pong.log', 'utf8')
-
-    return pongText
+    const pings = await fetch('http://ping-pong-app-svc:3456/pings')
+    const pingNr = await pings.json()
+    console.log('pings:', pingNr)
+    return Number(pingNr)
   } catch (error) {
-    console.log('could not get pong file:', error)
+    console.log('could not get pings file:', error)
     return '0'
   }
 }
@@ -20,7 +20,7 @@ const appendString = async () => {
     const logEntry = `${randomString} ${timestamp}\n`;
     const pong = await getPong()
     await fs.appendFile('/usr/src/app/files/log_output.log', logEntry, 'utf8');
-    await fs.appendFile('/usr/src/app/files/log_output.log', `pong / pongs ${pong}\n`, 'utf8');
+    await fs.appendFile('/usr/src/app/files/log_output.log', `ping / pongs ${pong}\n`, 'utf8');
 
     console.log(`Log entry added: ${randomString} ${timestamp}`);
     console.log(`logged pongs: ${pong}`)

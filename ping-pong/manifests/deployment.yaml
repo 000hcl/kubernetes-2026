@@ -12,13 +12,6 @@ spec:
       labels:
         app: ping-pong-app
     spec:
-      volumes:
-        - name: log-persistent
-          persistentVolumeClaim:
-            claimName: log-claim
       containers:
         - name: ping-pong-app
-          image: heclll/ping-pong-app:0.6
-          volumeMounts:
-            - name: log-persistent
-              mountPath: /usr/src/app/persistent
+          image: heclll/ping-pong-app:0.8
