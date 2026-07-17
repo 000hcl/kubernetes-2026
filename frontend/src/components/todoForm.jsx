@@ -1,16 +1,18 @@
 import { useState } from 'react'
 
-const TodoForm = () => {
+const TodoForm = ({ handleCreate }) => {
   const [todo, setTodo] = useState('')
   const [error, setError] = useState(null)
   const addTodo = async (event) => {
     event.preventDefault()
-    console.log(todo)
-    if (todo.length>140) {
-      setError('Todo length exceeds 140 characters!')
-    } else {
+    try {
+      await handleCreate(todo)
       setError(null)
       setTodo('')
+    } catch (error) {
+      console.log(error)
+      console.log(error.response.data.error)
+      setError('Invalid content')
     }
   }
   return (

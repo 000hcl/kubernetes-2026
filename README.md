@@ -20,4 +20,5 @@
 
 ### chapter 3
 
-- 2.1 *current*
+- [2.1](https://github.com/000hcl/kubernetes-2026/tree/2.1)
+- 2.2 *current*

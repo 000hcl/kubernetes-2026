@@ -21,6 +21,13 @@ spec:
             name: todo-app-svc
             port:
               number: 1234
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: todo-backend-svc
+            port:
+              number: 1123
       - path: /pingpong
         pathType: Prefix
         backend:

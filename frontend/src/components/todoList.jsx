@@ -1,25 +1,10 @@
-import { useState, useEffect } from 'react'
-
-const TodoList = () => {
-  const [todos, setTodos] = useState([])
-  const todolist = [
-    'Do this exercise',
-    'Read up on C++',
-    'Investigate moth issue'
-  ]
-  const getTodos = async () => {
-    setTodos(todolist)
-  }
-  useEffect(() => {
-    getTodos()
-  }, [])
-
+const TodoList = ({ todos }) => {
 
   return (
     <div>
       <ul>
         {todos.map(t =>
-          <li key={t}>{t}</li>
+          <li key={t.content}>{t.content} {t.done? <b>done</b> : <b>not done</b>}</li>
         )}
       </ul>
     </div>

@@ -18,7 +18,7 @@ spec:
             claimName: log-claim
       containers:
         - name: todo-app
-          image: heclll/todo-app:1.0
+          image: heclll/todo-app:1.7
           volumeMounts:
             - name: persistent
               mountPath: /usr/src/app/persistent
