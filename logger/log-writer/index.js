@@ -14,11 +14,25 @@ const getPong = async () => {
   }
 }
 
+const getFileContent = async () => {
+  const content = await fs.readFile('/usr/src/app/conf/information.txt', 'utf8')
+  return `file content: ${content}`
+}
+
+const getMessage = async () => {
+  const msg = process.env.MESSAGE
+  return `env variable: MESSAGE=${msg}\n`
+}
+
 const appendString = async () => {
   try {
     const timestamp = new Date().toISOString()
-    const logEntry = `${randomString} ${timestamp}\n`;
+    const logEntry = `${randomString} ${timestamp}\n`
+    const fileContent = await getFileContent()
+    const message = await getMessage()
     const pong = await getPong()
+    await fs.appendFile('/usr/src/app/files/log_output.log', fileContent, 'utf8');
+    await fs.appendFile('/usr/src/app/files/log_output.log', message, 'utf8');
     await fs.appendFile('/usr/src/app/files/log_output.log', logEntry, 'utf8');
     await fs.appendFile('/usr/src/app/files/log_output.log', `ping / pongs ${pong}\n`, 'utf8');
 

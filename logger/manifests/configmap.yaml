@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: log-map
+  namespace: exercises
+data:
+  message: "hello world"
+
+  information.txt: |
+    this text is from file information.txt

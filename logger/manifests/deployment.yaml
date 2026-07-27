@@ -16,14 +16,27 @@ spec:
       volumes:
         - name: log-volume
           emptyDir: {}
+        - name: conf-vol
+          configMap:
+            name: log-map
+            items:
+            - key: "information.txt"
+              path: "information.txt"
 
       containers:
         - name: log-writer
-          image: heclll/log-writer:0.7
-
+          image: heclll/log-writer:1.3
+          env:
+          - name: MESSAGE
+            valueFrom:
+              configMapKeyRef:
+                name: log-map
+                key: message
           volumeMounts:
             - name: log-volume
               mountPath: /usr/src/app/files
+            - name: conf-vol
+              mountPath: /usr/src/app/conf
 
         - name: log-getter
           image: heclll/log-getter:0.7
