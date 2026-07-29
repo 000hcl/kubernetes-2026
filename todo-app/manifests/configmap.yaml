@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: project
+data:
+  port: "3000"
+  imgDownload: "https://picsum.photos/200"
+  storageRoute: "/usr/src/app/persistent"

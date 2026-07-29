@@ -15,4 +15,10 @@ spec:
     spec:
       containers:
         - name: todo-backend
-          image: heclll/todo-backend:0.5
+          image: heclll/todo-backend:0.7
+          env:
+          - name: PORT
+            valueFrom:
+              configMapKeyRef:
+                name: backend-config
+                key: port

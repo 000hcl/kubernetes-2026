@@ -1,15 +1,9 @@
 const express = require('express')
-const cors = require('cors')
 const app = express()
 app.use(express.json())
 
 let todos = []
 
-//Ingress?? headache
-app.use(cors({
-  origin: 'http://todo-app-svc:1234',
-  credentials: true
-}))
 
 app.get('/api/todos', async (req, res) => {
   res.send({todos: todos})
@@ -24,7 +18,7 @@ app.post('/api/todos', async (req, res) => {
   return res.send({todos: todos})
 })
 
-const PORT = 3000
+const PORT = Number(process.env.PORT)
 app.listen(PORT, () => {
   console.log(`Server started in port ${PORT}`)
 })
