@@ -1,12 +1,27 @@
 const express = require('express')
 const app = express()
 app.use(express.json())
+const pgp = require('pg-promise')()
 
-let todos = []
+POSTGRES_USER = process.env.POSTGRES_USER
+POSTGRES_PASSWORD = process.env.POSTGRES_PASSWORD
+POSTGRES_DB = process.env.POSTGRES_DB
+HOST = process.env.HOST
+DB_PORT = process.env.DB_PORT
 
+//postgres://postgres:postgres@postgres-svc:5432/projectdb
+const db = pgp(`postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${HOST}:${DB_PORT}/${POSTGRES_DB}`)
+
+
+
+const setUpTableIfNotExisting = async () => {
+  db.none('CREATE TABLE IF NOT EXISTS todos (id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY, content TEXT, done BOOLEAN DEFAULT FALSE);')
+}
 
 app.get('/api/todos', async (req, res) => {
-  res.send({todos: todos})
+  await setUpTableIfNotExisting()
+  const result = await db.any('SELECT * FROM todos;')
+  res.send({todos: result? result : []})
 })
 
 app.post('/api/todos', async (req, res) => {
@@ -14,8 +29,15 @@ app.post('/api/todos', async (req, res) => {
   if (body.content.length>150 || !body.content) {
     return res.status(400).send({error: 'Todo must be between 1 and 150 characters!'})
   }
-  todos.push({content: body.content, done: false})
-  return res.send({todos: todos})
+  await setUpTableIfNotExisting()
+  try {
+    await db.none('INSERT INTO todos(content) VALUES($1)', [body.content])
+    const result = await db.any('SELECT * FROM todos;')
+    res.send({todos: result? result : []})
+  } catch (error) {
+    console.log(error)
+  }
+
 })
 
 const PORT = Number(process.env.PORT)

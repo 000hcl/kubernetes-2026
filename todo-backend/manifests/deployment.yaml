@@ -15,10 +15,32 @@ spec:
     spec:
       containers:
         - name: todo-backend
-          image: heclll/todo-backend:0.7
+          image: heclll/todo-backend:1.0
           env:
           - name: PORT
             valueFrom:
               configMapKeyRef:
                 name: backend-config
                 key: port
+          - name: POSTGRES_USER
+            value: postgres
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgres-secret
+                key: password
+          - name: POSTGRES_DB
+            valueFrom:
+              configMapKeyRef:
+                name: backend-config
+                key: postgresDb
+          - name: HOST
+            valueFrom:
+              configMapKeyRef:
+                name: backend-config
+                key: postgresHost
+          - name: DB_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: backend-config
+                key: postgresPort

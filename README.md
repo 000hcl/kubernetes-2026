@@ -26,4 +26,5 @@
 - [2.4](https://github.com/000hcl/kubernetes-2026/tree/2.4)
 - [2.5](https://github.com/000hcl/kubernetes-2026/tree/2.5/logger)
 - [2.6](https://github.com/000hcl/kubernetes-2026/tree/2.6)
-- 2.7 *current*
+- [2.7](https://github.com/000hcl/kubernetes-2026/tree/2.7/ping-pong)
+- 2.8 *current*

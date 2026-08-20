@@ -5,4 +5,6 @@ metadata:
   namespace: project
 data:
   port: "3000"
-
+  postgresHost: "postgres-svc"
+  postgresDb: "projectdb"
+  postgresPort: "5432"
