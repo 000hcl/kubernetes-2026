@@ -15,4 +15,18 @@ spec:
     spec:
       containers:
         - name: ping-pong-app
-          image: heclll/ping-pong-app:0.8
+          image: heclll/ping-pong-app:1.6
+          env:
+          - name: POSTGRES_USER
+            value: postgres
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgres-secret
+                key: password
+          - name: POSTGRES_DB
+            value: db
+          - name: HOST
+            value: postgres-svc
+          - name: DB_PORT
+            value: "5432"

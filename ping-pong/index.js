@@ -1,36 +1,37 @@
 const express = require('express')
 const app = express()
-const fs = require('fs').promises
+const pgp = require('pg-promise')()
+
+POSTGRES_USER = process.env.POSTGRES_USER
+POSTGRES_PASSWORD = process.env.POSTGRES_PASSWORD
+POSTGRES_DB = process.env.POSTGRES_DB
+HOST = process.env.HOST
+DB_PORT = process.env.DB_PORT
+
+//postgres://{user}:{password}@postgres-svc:5432/db
+const db = pgp(`postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${HOST}:${DB_PORT}/${POSTGRES_DB}`)
 
 app.use(express.json())
 
-let pongs = 0
+
+const setUpTableIfNotExisting = async () => {
+  db.none('CREATE TABLE IF NOT EXISTS pongs (pongs INTEGER, id INTEGER PRIMARY KEY); INSERT INTO pongs(pongs, id) VALUES($1, $2) ON CONFLICT (id) DO NOTHING', [0, 1])
+}
 
 app.get('/pingpong', async (req, res) => {
-  // try {
-  //   await fs.access('/usr/src/app/persistent/pong.log', fs.constants.F_OK)
-  //   const pongText = await fs.readFile('/usr/src/app/persistent/pong.log', 'utf8')
-  //   const pongNr = Number(pongText)
-  //   await fs.writeFile('/usr/src/app/persistent/pong.log', String(pongNr+1), 'utf8')
-  //   return res.send(`pong ${pongNr+1}`)
-  // } catch (error) {
-  //   console.log('Could not access:', error)
-  //   await fs.writeFile('/usr/src/app/persistent/pong.log', '0', 'utf8')
-  //   return res.send(`pong 0`)
-
-  // }
-  pongs = pongs+1
-  res.send(`pong ${pongs}`)
+  await setUpTableIfNotExisting()
+  const result = await db.one('SELECT pongs FROM pongs WHERE id = 1;')
+  const newpongs = result.pongs+1
+  await db.none(`UPDATE pongs SET pongs = $1 WHERE id = 1`, [newpongs])
+  res.send(`pong ${newpongs}`)
 
 })
 
 app.get('/pings', async (req, res) => {
   try {
-    // await fs.access('/usr/src/app/persistent/pong.log', fs.constants.F_OK)
-    // const pongText = await fs.readFile('/usr/src/app/persistent/pong.log', 'utf8')
-    // const pongNr = Number(pongText)
-    // res.send(pongNr)
-    res.send(pongs)
+    await setUpTableIfNotExisting()
+    const result = await db.one('SELECT pongs FROM pongs WHERE id = 1;')
+    res.send(result.pongs)
   } catch (error) {
     console.log('Could not get /pings', error)
   }
