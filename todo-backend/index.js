@@ -26,16 +26,18 @@ app.get('/api/todos', async (req, res) => {
 
 app.post('/api/todos', async (req, res) => {
   const body = req.body
-  if (body.content.length>150 || !body.content) {
+  if (!body.content || body.content.length > 150) {
+    console.log(`POST /api/todos ERROR: content too long \n content: ${body.content}`)
     return res.status(400).send({error: 'Todo must be between 1 and 150 characters!'})
   }
   await setUpTableIfNotExisting()
   try {
     await db.none('INSERT INTO todos(content) VALUES($1)', [body.content])
     const result = await db.any('SELECT * FROM todos;')
-    res.send({todos: result? result : []})
+    console.log(`POST /api/todos content: ${body.content}`)
+    return res.send({todos: result? result : []})
   } catch (error) {
-    console.log(error)
+    console.log(`POST /api/todos ERROR: ${error}`)
   }
 
 })
