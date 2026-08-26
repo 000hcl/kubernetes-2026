@@ -2,6 +2,10 @@ const express = require('express')
 const app = express()
 const fs = require('fs').promises
 
+app.get('/', async (req, res) => {
+  res.sendStatus(200)
+})
+
 app.get('/logs', async (req, res) => {
   try {
     const logs = await fs.readFile('/usr/src/app/files/log_output.log', 'utf8')

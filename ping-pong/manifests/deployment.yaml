@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: ping-pong-app
-          image: heclll/ping-pong-app:1.6
+          image: heclll/ping-pong-app:1.7
           env:
           - name: POSTGRES_USER
             value: postgres

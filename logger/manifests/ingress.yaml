@@ -4,11 +4,10 @@ metadata:
   name: exercise-ingress
   namespace: exercises
 spec:
-  ingressClassName: traefik
   rules:
   - http:
       paths:
-      - path: /logs
+      - path: /
         pathType: Prefix
         backend:
           service:

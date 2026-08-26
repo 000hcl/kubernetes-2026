@@ -37,6 +37,10 @@ app.get('/pings', async (req, res) => {
   }
 })
 
+app.get('/', (req, res) => {
+  res.sendStatus(200)
+})
+
 
 const PORT = 3000
 app.listen(PORT, () => {

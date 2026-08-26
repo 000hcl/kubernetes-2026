@@ -39,7 +39,7 @@ spec:
               mountPath: /usr/src/app/conf
 
         - name: log-getter
-          image: heclll/log-getter:0.7
+          image: heclll/log-getter:0.8
           volumeMounts:
             - name: log-volume
               mountPath: /usr/src/app/files

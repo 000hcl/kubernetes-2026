@@ -33,4 +33,5 @@
 
 ### chapter 4
 
-- 3.1 *current*
+- [3.1](https://github.com/000hcl/kubernetes-2026/tree/3.1/ping-pong)
+- 3.2 *current*
