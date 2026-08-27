@@ -4,9 +4,9 @@ metadata:
   name: todo-claim
   namespace: project
 spec:
-  storageClassName: todo-pv
   accessModes:
     - ReadWriteOnce
+  storageClassName: standard-rwo
   resources:
     requests:
       storage: 1Gi

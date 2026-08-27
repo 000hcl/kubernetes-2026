@@ -42,6 +42,10 @@ app.post('/api/todos', async (req, res) => {
 
 })
 
+app.get('/', async (req, res) => {
+  res.sendStatus(200)
+})
+
 const PORT = Number(process.env.PORT)
 app.listen(PORT, () => {
   console.log(`Server started in port ${PORT}`)
