@@ -18,7 +18,7 @@ const setUpTableIfNotExisting = async () => {
   db.none('CREATE TABLE IF NOT EXISTS pongs (pongs INTEGER, id INTEGER PRIMARY KEY); INSERT INTO pongs(pongs, id) VALUES($1, $2) ON CONFLICT (id) DO NOTHING', [0, 1])
 }
 
-app.get('/pingpong', async (req, res) => {
+app.get('/', async (req, res) => {
   await setUpTableIfNotExisting()
   const result = await db.one('SELECT pongs FROM pongs WHERE id = 1;')
   const newpongs = result.pongs+1
