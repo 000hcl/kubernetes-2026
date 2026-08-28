@@ -77,7 +77,7 @@ jobs:
           PROJECT/todo-app=$TODO_APP_IMAGE \
           PROJECT/todo-backend=$TODO_BACKEND_IMAGE
 
-        kustomize build . | kubectl apply -f -
+        kustomize build . | kubectl apply -n project -f -
 
         kubectl rollout status deployment/todo-app
         kubectl rollout status deployment/todo-backend
