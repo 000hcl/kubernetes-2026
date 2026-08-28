@@ -36,10 +36,7 @@ spec:
             - name: POSTGRES_USER 
               value: postgres
             - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-secret
-                  key: password
+              value: postgres
             - name: PGDATA
               value: /var/lib/postgresql/data/pgdata
             - name: POSTGRES_DB
@@ -55,7 +52,7 @@ spec:
         name: postgres-pv-claim
       spec:
         accessModes:
-          - ReadWriteOnce
+          - ReadWriteMany
         storageClassName: standard-rwo
         resources:
           requests:

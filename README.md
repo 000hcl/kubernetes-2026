@@ -37,4 +37,5 @@
 - [3.2](https://github.com/000hcl/kubernetes-2026/tree/3.2) 
 - [3.3](https://github.com/000hcl/kubernetes-2026/tree/3.3)
 - [3.4](https://github.com/000hcl/kubernetes-2026/tree/3.4)
-- 3.5 *current*
+- [3.5](https://github.com/000hcl/kubernetes-2026/tree/3.5)
+- 3.6 *current*
