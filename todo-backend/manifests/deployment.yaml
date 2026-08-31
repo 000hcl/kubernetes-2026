@@ -41,3 +41,10 @@ spec:
               configMapKeyRef:
                 name: backend-config
                 key: postgresPort
+          resources:
+            requests:
+              cpu: 2m
+              memory: 30Mi
+            limits:
+              cpu: 20m
+              memory: 100Mi

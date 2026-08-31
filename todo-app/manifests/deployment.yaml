@@ -39,3 +39,10 @@ spec:
               configMapKeyRef:
                 name: app-config
                 key: storageRoute
+          resources:
+            requests:
+              cpu: 1m
+              memory: 50Mi
+            limits:
+              cpu: 10m
+              memory: 150Mi

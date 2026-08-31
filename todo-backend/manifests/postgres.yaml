@@ -52,7 +52,7 @@ spec:
         name: postgres-pv-claim
       spec:
         accessModes:
-          - ReadWriteMany
+          - ReadWriteOnce
         storageClassName: standard-rwo
         resources:
           requests:
