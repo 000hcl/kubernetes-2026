@@ -16,6 +16,7 @@ env:
   IMAGE: dwk-environments
   SERVICE: dwk-environments
   BRANCH: ${{ github.ref_name }}
+  NAMESPACE: ${{ github.ref_name == 'main' && 'project' || github.ref_name }}
 
 
 jobs:
@@ -73,13 +74,16 @@ jobs:
 
     - name: Deploy
       run: |-
+        kubectl create namespace ${NAMESPACE} || true
+        kubectl config set-context --current --namespace=${NAMESPACE}
+        kustomize edit set namespace ${NAMESPACE}
         kustomize edit set image \
           PROJECT/todo-app=$TODO_APP_IMAGE \
           PROJECT/todo-backend=$TODO_BACKEND_IMAGE
 
-        kustomize build . | kubectl apply -n project -f -
+        kustomize build . | kubectl apply -f -
 
-        kubectl rollout status deployment/todo-app -n project
-        kubectl rollout status deployment/todo-backend -n project
+        kubectl rollout status deployment/todo-app -n ${NAMESPACE}
+        kubectl rollout status deployment/todo-backend -n ${NAMESPACE}
 
         kubectl get services -o wide
