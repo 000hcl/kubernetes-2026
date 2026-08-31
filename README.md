@@ -43,7 +43,8 @@
 - [3.8](https://github.com/000hcl/kubernetes-2026/tree/main/.github/workflows)
 - 3.9 below
 - 3.10 skipped
-- 3.11 *current*
+- [3.11](https://github.com/000hcl/kubernetes-2026/tree/3.11)
+- 3.12 current
 
 ### 3.9: DBaaS vs DIY
 
