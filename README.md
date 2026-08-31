@@ -44,7 +44,7 @@
 - 3.9 below
 - 3.10 skipped
 - [3.11](https://github.com/000hcl/kubernetes-2026/tree/3.11)
-- 3.12 current
+- [3.12](https://github.com/000hcl/kubernetes-2026/blob/3.12/image/logs.png)
 
 ### 3.9: DBaaS vs DIY
 
