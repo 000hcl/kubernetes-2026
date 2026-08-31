@@ -69,6 +69,8 @@ Sources:
 ## Notes
 
 - Log and ping pong app are started by applying logger/manifests and ping-pong/manifests
+- the secret postgres-secret:password has been set by running "kubectl create secret generic postgres-secret --from-literal=password=postgres". In later exercises the password has been stored as a regular value in todo app.
 - Todo app is started by applying kustomization.yaml
 - It is assumed that either namespace project or exercises is in use.
 - The Frontend of the Todo app  (which resides in its own directory) has been built into a dist directory and manually inserted into todo-app before dockerized into an image.
+  
