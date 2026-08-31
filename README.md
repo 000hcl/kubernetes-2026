@@ -66,3 +66,9 @@ Sources:
 - https://www.percona.com/blog/database-upgrades-diy-or-choose-a-database-upgrade-consulting-service/
 - https://aerospike.com/blog/the-five-key-benefits-of-dbaas/
 
+## Notes
+
+- Log and ping pong app are started by applying logger/manifests and ping-pong/manifests
+- Todo app is started by applying kustomization.yaml
+- It is assumed that either namespace project or exercises is in use.
+- The Frontend of the Todo app  (which resides in its own directory) has been built into a dist directory and manually inserted into todo-app before dockerized into an image.
