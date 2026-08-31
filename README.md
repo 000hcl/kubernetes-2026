@@ -73,4 +73,5 @@ Sources:
 - Todo app is started by applying kustomization.yaml
 - It is assumed that either namespace project or exercises is in use.
 - The Frontend of the Todo app  (which resides in its own directory) has been built into a dist directory and manually inserted into todo-app before dockerized into an image.
+- Some exercises are linked to the root repository, if exercises have been done in multiple directories. Generally the commit is named after the relevant exercise.
   
