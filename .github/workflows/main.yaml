@@ -93,22 +93,6 @@ name: Delete environment
 on:
   delete:
 
-permissions:
-  contents: read
-  id-token: write
-
-env:
-  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  GKE_CLUSTER: dwk-cluster
-  GKE_ZONE: europe-north1-b
-  REGISTRY: europe-north1-docker.pkg.dev
-  REPOSITORY: my-repository
-  IMAGE: dwk-environments
-  SERVICE: dwk-environments
-  BRANCH: ${{ github.event.ref }}
-  NAMESPACE: ${{ github.event.ref == 'main' && 'project' || github.event.ref }}
-
-
 jobs:
   setup-delete-env:
     name: Set up and delete environment
@@ -116,6 +100,16 @@ jobs:
     environment: main
 
     steps:
+    - name: Change env variables
+      run: echo "BRANCH=${{ github.event.ref }}" >> "$GITHUB_ENV"
+
+    - run: |
+        if [ "${{ github.event.ref }}" = "main" ]; then
+          echo "NAMESPACE=project" >> "$GITHUB_ENV"
+        else
+          echo "NAMESPACE=${{ github.event.ref }}" >> "$GITHUB_ENV"
+        fi
+
     - name: Checkout
       uses: actions/checkout@v6
 
